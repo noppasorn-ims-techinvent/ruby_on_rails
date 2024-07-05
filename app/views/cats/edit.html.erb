@@ -1,0 +1,11 @@
+<% content_for :title, "Editing cat" %>
+
+<h1>Editing cat</h1>
+
+<%= render "form", cat: @cat %>
+
+<br>
+
+<div>
+  <%= link_to "Cancel and Return to cats", cats_path %>
+</div>

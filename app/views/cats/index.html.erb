@@ -1,0 +1,33 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Cats" %>
+<h1>Cats List Page</h1>
+
+<div id="cats">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @cats.each do |cat| %>
+      <tr>
+          <th><%= cat.name %></th>
+          <th><%= cat.color %></th>
+          <th>
+            <%= link_to 'Show', cat_path(cat) %>
+            <%= link_to 'Edit', edit_cat_path(cat) %>
+            <%= link_to 'Delete', cat_path(cat),
+              data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+          </th>
+        </tr>        
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p><%= link_to "Create new cat", new_cat_path %></p>
+<p><%= link_to 'Home page', root_path %></p>
