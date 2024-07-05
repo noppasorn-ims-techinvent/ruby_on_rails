@@ -33,3 +33,11 @@ body {
 .table td {
   vertical-align: middle;
 }
+
+.float-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  width: auto;
+}
