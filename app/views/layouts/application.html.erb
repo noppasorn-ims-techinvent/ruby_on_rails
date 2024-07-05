@@ -22,7 +22,7 @@
 
   <body class="d-flex flex-column">
     <%= render 'layouts/navbar' %>
-    <div class="container mt-4">
+
       <% flash.each do |key, message| %>
         <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show float-alert" role="alert">
           <%= message %>
