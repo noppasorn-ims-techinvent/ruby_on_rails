@@ -1,0 +1,32 @@
+h1 {
+  color: red;
+}
+h2 {
+  color: blueviolet;
+}
+
+.navbar {
+  background-color: black;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+#logo {
+  float: left;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}

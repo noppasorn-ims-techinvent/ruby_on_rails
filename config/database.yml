@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: pang
+  password: 12345
+  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: ruby_v2_development
+
+test:
+  <<: *default
+  database: ruby_v2_test
+
+production:
+  <<: *default
+  database: ruby_v2_production
+  username: ruby_v2
+  password: <%= ENV["RUBY_V2_DATABASE_PASSWORD"] %>
