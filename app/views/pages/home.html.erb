@@ -1,4 +1,16 @@
-<h1>Welcome to the Home page</h1>
-
-<%= link_to 'Cats List', cats_path %>  
-<%= link_to 'About page', about_path %>
+<div id="page-content">
+  <div class="container" id="home-container">
+    <div class="p-5 mb-4 bg-jumbotron rounded-3 text-center position-relative text-white" style="background-image: url(<%= asset_path('bg-cats.jpg') %>); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <div class="container-fluid py-5 d-flex flex-column align-items-center position-relative">
+        <h1 class="display-5 fw-bold">Custom jumbotron</h1>
+        <p class="col-md-8 fs-4 text-center">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+        <button class="btn btn-primary btn-lg" type="button">Sign up!</button>
+      </div>
+    </div>
+</div>
+</div>
+<footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white">
+  <div class="container text-center">
+    <small>Copyright &copy; Ruby Project Demo</small>
+   </div>
+</footer>

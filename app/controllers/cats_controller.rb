@@ -22,39 +22,31 @@ class CatsController < ApplicationController
   # POST /cats or /cats.json
   def create
     @cat = Cat.new(cat_params)
-
-    respond_to do |format|
-      if @cat.save
-        format.html { redirect_to cat_url(@cat), notice: "Cat was successfully created." }
-        format.json { render :show, status: :created, location: @cat }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
-      end
+    if @cat.save
+      flash[:success] = "Cat was successfully created."
+      redirect_to @cat
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /cats/1 or /cats/1.json
   def update
-    respond_to do |format|
-      if @cat.update(cat_params)
-        format.html { redirect_to cat_url(@cat), notice: "Cat was successfully updated." }
-        format.json { render :show, status: :ok, location: @cat }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
-      end
+    @cat = Cat.find(params[:id])
+    if @cat.update(cat_params)
+      flash[:success] = "Cat was successfully updated."
+      redirect_to @cat
+    else
+      render :edit
     end
   end
 
   # DELETE /cats/1 or /cats/1.json
   def destroy
-    @cat.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to cats_url, notice: "Cat was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @cat = Cat.find(params[:id])
+    @cat.destroy
+    flash[:success] = "Cat was successfully deleted."
+    redirect_to cats_url
   end
 
   private

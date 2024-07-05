@@ -22,4 +22,14 @@ body {
 
 #page-content {
   flex: 1 0 auto;
+  background-color: lightgrey;
+}
+
+#home-container {
+  margin-top: 25px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
 }

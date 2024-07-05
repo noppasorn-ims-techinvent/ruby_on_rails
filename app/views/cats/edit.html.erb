@@ -1,11 +1,11 @@
 <% content_for :title, "Editing cat" %>
 
-<h1>Editing cat</h1>
+<div class="container my-5">
+  <h1 class="mb-4">Editing Cat</h1>
 
-<%= render "form", cat: @cat %>
+  <%= render "form", cat: @cat %>
 
-<br>
-
-<div>
-  <%= link_to "Cancel and Return to cats", cats_path %>
+  <div class="mt-3">
+    <%= link_to "Cancel and Return to cats", cats_path, class: "btn btn-secondary" %>
+  </div>
 </div>

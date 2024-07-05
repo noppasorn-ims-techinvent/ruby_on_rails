@@ -1,6 +1,6 @@
-<%= form_with(model: cat) do |form| %>
+<%= form_with(model: cat, local: true, class: "needs-validation", novalidate: true) do |form| %>
   <% if cat.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
 
       <ul>
@@ -11,17 +11,43 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+    <div class="invalid-feedback">
+      Please provide a name.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :color, class: "form-label" %>
+    <%= form.text_field :color, class: "form-control", required: true %>
+    <div class="invalid-feedback">
+      Please provide a color.
+    </div>
   </div>
 
   <div>
-    <%= form.label :color, style: "display: block" %>
-    <%= form.text_field :color %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+  (function () {
+    'use strict'
+    
+    var forms = document.querySelectorAll('.needs-validation')
+
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>

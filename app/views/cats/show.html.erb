@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<div class="container my-5">
+  <p class="text-success"><%= notice %></p>
 
-<%= render @cat %>
+  <%= render @cat %>
 
-<div>
-  <%= link_to "Edit this cat", edit_cat_path(@cat) %> |
-  <%= link_to "Back to cats list page", cats_path %>
-
-  <%= button_to "Delete this cat", @cat, method: :delete %>
+  <div class="d-flex justify-content-start">
+    <%= link_to "Edit this Cat", edit_cat_path(@cat), class: "btn btn-warning mx-2" %>
+    <%= link_to "Back to Cats list page", cats_path, class: "btn btn-secondary mx-2" %>
+    <%= link_to "Delete this cat", "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(@cat) }, class: "btn btn-danger" %>
+  </div>
 </div>
