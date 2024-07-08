@@ -1,38 +1,46 @@
-<% content_for :title, "Cats" %>
 <div class="container my-5">
   <h1 class="mb-4">Cats List Page</h1>
-
-  <div id="cats" class="table-responsive">
-    <table class="table table-hover">
-      <thead class="thead-dark">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Creator</th>
+        <th>Actions</th>
+        <th class="bg-light text-secondary">Created At</th>
+        <th class="bg-light text-secondary">Updated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cats.each do |cat| %>
         <tr>
-          <th>Name</th>
-          <th>Color</th>
-          <th>Actions</th>
-          <th class="bg-light text-secondary">Created At</th>
-          <th class="bg-light text-secondary">Updated At</th>
+          <td><%= cat.name %></td>
+          <td>
+            <%= display_color_block(cat.color) %>
+            <%= cat.color %>
+          </td>
+          <td><%= link_to (cat.user ? cat.user.username : "Unknown"), (cat.user ? user_path(cat.user) : "#"), class: 'text-decoration-none' %></td>
+          <td>
+            <%= link_to 'Show', cat_path(cat), class: 'btn btn-info btn-sm me-2' %>
+            <%= link_to 'Edit', edit_cat_path(cat), class: 'btn btn-warning btn-sm me-2' %>
+            <%= link_to "Delete this cat", "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(cat) }, class: "btn btn-danger btn-sm" %>
+          </td>
+          <td class="bg-light text-secondary"><%= cat.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td class="bg-light text-secondary"><%= cat.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @cats.each do |cat| %>
-          <tr>
-            <td><%= cat.name %></td>
-            <td><%= cat.color %></td>
-            <td>
-              <%= link_to 'Show', cat_path(cat), class: 'btn btn-info btn-sm me-2' %>
-              <%= link_to 'Edit', edit_cat_path(cat), class: 'btn btn-warning btn-sm me-2' %>
-              <%= link_to "Delete this cat", "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(cat) }, class: "btn btn-danger" %>
-            </td>
-            <td class="bg-light text-secondary"><%= cat.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-            <td class="bg-light text-secondary"><%= cat.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
 
-  <div class="d-flex justify-content-start">
-    <p><%= link_to "Create new cat", new_cat_path, class: 'btn btn-primary mx-2' %></p>
-    <p><%= link_to 'Home page', root_path, class: 'btn btn-secondary' %></p>
+  <!-- Control Row for Pagination and Button -->
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <div>
+    <%= link_to 'Home page', root_path, class: 'btn btn-secondary' %>
+      <%= link_to "Create new cat", new_cat_path, class: 'btn btn-primary' %>
+    </div>
+    <div>
+     <%= paginate @cats %>
+    </div>
   </div>
+  
 </div>

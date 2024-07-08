@@ -4,5 +4,5 @@ module UsersHelper
       gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
       image_tag(gravatar_url, alt: user.username, class: "gravatar rounded shadow mx-auto p-2", style: "border: none;")
     end
-  end
+end
   

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :cats
   root "pages#home"
   get 'about', to: 'pages#about'
+  get 'login', to: 'sessions#new'
+  get 'login', to: 'session#create'
+  get 'logout', to: 'sessions#destroy'
   
   get "up" => "rails/health#show", as: :rails_health_check
 

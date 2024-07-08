@@ -1,0 +1,10 @@
+<div class="user mb-3">
+  <div class="card">
+    <div class="card-body text-center">
+      <%= gravatar_for user, size: 80 %> 
+      <h3 class="mt-2"><%= user.username %></h3>
+      <p><%= user.email %></p>
+      <%= link_to "Show this user", user_path(user), class: 'btn btn-info' %>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ class CatsController < ApplicationController
 
   # GET /cats or /cats.json
   def index
-    @cats = Cat.all
+    @cats = Cat.page(params[:page]).per(5)
   end
 
   # GET /cats/1 or /cats/1.json
