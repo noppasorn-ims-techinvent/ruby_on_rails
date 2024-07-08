@@ -2,8 +2,10 @@
   <%= render @cat %>
 
   <div class="d-flex justify-content-start">
-    <%= link_to "Edit this Cat", edit_cat_path(@cat), class: "btn btn-warning mx-2" %>
     <%= link_to "Back to Cats list page", cats_path, class: "btn btn-secondary mx-2" %>
-    <%= link_to "Delete this cat", "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(@cat) }, class: "btn btn-danger" %>
+    <% if logged_in? && @cat.user == current_user %>
+      <%= link_to "Edit this Cat", edit_cat_path(@cat), class: "btn btn-warning mx-2" %>
+      <%= link_to "Delete this cat", "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(@cat) }, class: "btn btn-danger" %>
+    <% end %>
   </div>
 </div>

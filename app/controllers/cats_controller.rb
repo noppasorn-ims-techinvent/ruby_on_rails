@@ -1,5 +1,6 @@
 class CatsController < ApplicationController
   before_action :set_cat, only: %i[ show edit update destroy ]
+  before_action :require_login, only: %i[new edit create update destroy]
 
   # GET /cats or /cats.json
   def index
@@ -22,6 +23,7 @@ class CatsController < ApplicationController
   # POST /cats or /cats.json
   def create
     @cat = Cat.new(cat_params)
+    @cat.user = current_user
     if @cat.save
       flash[:success] = "Cat was successfully created."
       redirect_to @cat
@@ -50,6 +52,13 @@ class CatsController < ApplicationController
   end
 
   private
+    def require_login
+      unless logged_in?
+        flash[:alert] = "You must be logged in to access this section"
+        redirect_to login_path
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_cat
       @cat = Cat.find(params[:id])

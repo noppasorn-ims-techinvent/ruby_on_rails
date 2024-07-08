@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_login, only: %i[ index show edit update destroy ]
   include UsersHelper
 
   # GET /users or /users.json
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id  
         flash[:notice] = "Welcome to the Ruby Demo, #{@user.username}! You have successfully signed in."
         format.html { redirect_to cats_path }
       else
@@ -58,6 +60,13 @@ class UsersController < ApplicationController
   end
 
   private
+    def require_login
+      unless logged_in?
+        flash[:alert] = "You must be logged in to access this section"
+        redirect_to login_path
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
