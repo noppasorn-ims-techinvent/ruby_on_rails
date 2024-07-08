@@ -61,4 +61,22 @@
     })
   })
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.querySelector(".needs-validation");
+    form.addEventListener('submit', function (event) {
+      var password = document.getElementById('password');
+      var confirmation = document.getElementById('password_confirmation');
+
+      if (password.value !== confirmation.value) {
+        event.preventDefault();
+        event.stopPropagation();
+        alert('Passwords do not match.');
+        confirmation.classList.add('is-invalid');
+      } else {
+        confirmation.classList.remove('is-invalid');
+      }
+    }, false);
+  });
+</script>
 </html>

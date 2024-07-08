@@ -19,13 +19,14 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /users
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        flash[:notice] = "Welcome to the Ruby Demo, #{@user.username}! You have successfully signed in."
+        format.html { redirect_to cats_path }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +66,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 end
