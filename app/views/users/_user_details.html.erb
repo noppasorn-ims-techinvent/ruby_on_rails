@@ -1,0 +1,46 @@
+<div id="<%= dom_id user %>" class="card shadow-lg text-center">
+  <div class="card-body p-0">
+    <%= gravatar_for user %>
+    <div class="card-header bg-primary text-white">
+      <h2>User Profile</h2>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">
+        <strong>Username:</strong> <%= user.username %>
+      </h5>
+      <p class="card-text">
+        <strong>Email:</strong> <%= user.email %>
+      </p>
+      <p class="card-text">
+        <strong>Account Created:</strong> <%= user.created_at.strftime("%B %d, %Y") %>
+      </p>
+      <%= link_to "Edit this user", edit_user_path(user), class: "btn btn-primary" %> |
+      <%= link_to "Back to users", users_path, class: "btn btn-secondary" %>
+    </div>
+    <hr>
+    <div class="card-footer">
+      <h3 class="card-title">Cats Created by <%= user.username %></h3>
+      <% if user.cats.any? %>
+        <div class="row justify-content-center">
+          <% user.cats.each do |cat| %>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= cat.name %></h5>
+                  <%= link_to 'Show', cat_path(cat), class: 'btn btn-sm btn-info' %>
+                  <%= link_to 'Edit', edit_cat_path(cat), class: 'btn btn-sm btn-warning' %>
+                  <%= link_to 'Delete', "#", data: { bs_toggle: "modal", bs_target: "#deleteModal", bs_url: cat_path(cat) }, class: "btn btn-sm btn-danger" %>
+                </div>
+              </div>
+            </div>
+            <% if (user.cats.index(cat) + 1) % 3 == 0 %>
+              <div class="w-100"></div> 
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>No cats found.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
